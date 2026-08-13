@@ -1,0 +1,26 @@
+# ============================================================================
+# REQUIREMENTS.TXT — Dépendances du DASHBOARD-IA PAM TOGO
+# Installation : pip install -r requirements.txt
+# ============================================================================
+
+dash>=2.18
+dash-bootstrap-components>=1.6
+plotly>=5.24  # px.scatter_map / px.choropleth_map disponibles depuis plotly 5.24+
+pandas>=2.2
+openpyxl>=3.1
+numpy>=1.26
+openai>=1.54
+
+# --- Optionnel : à installer seulement si vous branchez une vraie base ----
+mysql-connector-python>=9.0
+
+# psycopg2-binary (PostgreSQL) : décommentez la ligne ci-dessous UNIQUEMENT
+# si vous branchez une base PostgreSQL (voir GUIDE_UTILISATION.md, section 3).
+# Sur Python 3.14, si l'installation échoue faute de wheel disponible,
+# essayez plutôt : pip install psycopg2 (version non "binary", nécessite
+# les outils de compilation PostgreSQL) ou attendez une mise à jour du
+# paquet, ou utilisez Python 3.12/3.13 pour cette dépendance en particulier.
+# psycopg2-binary>=2.9
+
+# --- Optionnel : pour déployer avec Gunicorn (Render, etc.) ---------------
+gunicorn>=23.0

@@ -1,0 +1,218 @@
+/* ============================================================================
+   STYLE.CSS — DASHBOARD-IA PAM TOGO
+   ----------------------------------------------------------------------------
+   Dash charge automatiquement TOUS les fichiers CSS présents dans le dossier
+   /assets. Pas besoin de le lier manuellement dans app.py.
+   Pour changer les couleurs de marque, modifiez d'abord le dict COULEURS
+   dans app.py (il pilote les graphiques Plotly), PUIS les variables ci-
+   dessous (elles pilotent le reste de l'interface : header, cartes, etc.)
+   ============================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+  --bleu-pam: #007DBC;
+  --bleu-fonce: #00507A;
+  --orange-pam: #F7941E;
+  --gris-fond: #F4F6F8;
+  --rouge-alerte: #E63946;
+  --vert-ok: #2A9D8F;
+}
+
+body, .page-app {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--gris-fond);
+}
+
+/* ---------------------------- EN-TÊTE (HEADER) --------------------------- */
+.entete-app {
+  background: linear-gradient(100deg, var(--bleu-fonce) 0%, var(--bleu-pam) 60%, #0aa1e0 100%);
+  padding: 18px 0;
+  box-shadow: 0 4px 18px rgba(0, 80, 122, 0.25);
+  margin-bottom: 0;
+}
+
+.entete-gauche {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.entete-droite {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo-badge {
+  width: 56px;
+  height: 56px;
+  min-width: 56px;
+  border-radius: 14px;
+  background: var(--orange-pam);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.entete-titre {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 0.3px;
+}
+
+.entete-soustitre {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.85rem;
+  margin: 0;
+  font-weight: 400;
+}
+
+.badge-alertes {
+  font-size: 0.8rem;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.badge-taiss {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+/* ------------------------------ CARTES KPI -------------------------------- */
+.kpi-carte {
+  border: none;
+  border-radius: 16px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  height: 100%;
+}
+
+.kpi-carte:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 80, 122, 0.15) !important;
+}
+
+.kpi-icone {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.kpi-valeur {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--bleu-fonce);
+  margin-bottom: 2px;
+}
+
+.kpi-titre {
+  color: #7B8794;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+/* ------------------------------ CARTES / SECTIONS ------------------------- */
+.card {
+  border: none;
+  border-radius: 16px;
+}
+
+.carte-titre {
+  color: var(--bleu-fonce);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 16px;
+}
+
+/* --------------------------------- ONGLETS -------------------------------- */
+.nav-tabs .nav-link {
+  color: #7B8794;
+  border: none;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  padding: 10px 20px;
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--bleu-pam) !important;
+  background: transparent !important;
+  border-bottom: 3px solid var(--orange-pam) !important;
+}
+
+/* -------------------------------- FILTRES --------------------------------- */
+.filtre-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #7B8794;
+  margin-bottom: 4px;
+  display: block;
+}
+
+/* --------------------------------- ALERTES -------------------------------- */
+.alerte-item {
+  border-left: 4px solid var(--rouge-alerte) !important;
+  margin-bottom: 6px;
+  border-radius: 8px !important;
+  background: #FFF5F5;
+}
+
+.alerte-raison {
+  color: var(--rouge-alerte);
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* ----------------------------- BOUTON IA ----------------------------------- */
+.bouton-ia {
+  background: linear-gradient(90deg, var(--orange-pam), #ffb04d) !important;
+  border: none !important;
+  font-weight: 600;
+  color: var(--bleu-fonce) !important;
+  transition: transform 0.15s ease;
+}
+
+.bouton-ia:hover {
+  transform: scale(1.01);
+}
+
+.ia-resultat {
+  background: #F0F8FB;
+  border-radius: 12px;
+  padding: 16px 18px;
+  border-left: 4px solid var(--bleu-pam);
+}
+
+.ia-section-titre {
+  color: var(--bleu-fonce);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+/* -------------------------------- PIED DE PAGE ------------------------------ */
+.pied-de-page {
+  text-align: center;
+  color: #A0AAB4;
+  font-size: 0.78rem;
+  padding: 24px 0 12px 0;
+}
