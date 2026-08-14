@@ -429,33 +429,32 @@ Résumé chiffré des opérations PAM Togo pour {mois_label} :
     return f"{resume}\n\n{consigne}"
 
 
-def appeler_ia_openai(prompt):
-    """Appelle l'API OpenAI (SDK >= 1.0) et renvoie le texte généré.
+def appeler_ia_gemini(prompt):
+    """Appelle l'API Google Gemini (gratuite, sans carte bancaire requise) et
+    renvoie le texte généré.
 
-    Nécessite la variable d'environnement OPENAI_API_KEY définie, par ex. :
-        export OPENAI_API_KEY="sk-..."          (Mac/Linux)
-        setx OPENAI_API_KEY "sk-..."            (Windows)
+    Nécessite la variable d'environnement GEMINI_API_KEY définie. Pour
+    obtenir une clé gratuite : https://aistudio.google.com/apikey
+        export GEMINI_API_KEY="AIza..."         (Mac/Linux)
+        setx GEMINI_API_KEY "AIza..."           (Windows)
+    Sur Render : Environment → Add Environment Variable → Key = GEMINI_API_KEY
     """
-    from openai import OpenAI  # import local : évite un crash au démarrage si la lib/clé manque
+    from google import genai  # import local : évite un crash au démarrage si la lib/clé manque
 
-    cle_api = os.environ.get("OPENAI_API_KEY")
+    cle_api = os.environ.get("GEMINI_API_KEY")
     if not cle_api:
         raise RuntimeError(
-            "Aucune clé OPENAI_API_KEY trouvée. Définissez-la comme variable "
-            "d'environnement avant de lancer l'application (voir GUIDE_UTILISATION.md)."
+            "Aucune clé GEMINI_API_KEY trouvée. Définissez-la comme variable "
+            "d'environnement avant de lancer l'application (voir GUIDE_UTILISATION.md, "
+            "section 6). Clé gratuite disponible sur https://aistudio.google.com/apikey"
         )
 
-    client = OpenAI(api_key=cle_api)
-    reponse = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {"role": "system", "content": "Tu réponds toujours en français, de façon claire et structurée."},
-            {"role": "user", "content": prompt},
-        ],
-        temperature=0.4,
-        max_tokens=600,
+    client = genai.Client(api_key=cle_api)
+    reponse = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=prompt,
     )
-    return reponse.choices[0].message.content
+    return reponse.text
 
 
 def parser_reponse_ia(texte):
@@ -877,7 +876,7 @@ def generer_rapport_ia(n_clicks, mois_choisi):
     prompt = construire_prompt_ia(df_mois, mois_choisi)
 
     try:
-        texte_ia = appeler_ia_openai(prompt)
+        texte_ia = appeler_ia_gemini(prompt)
     except Exception as erreur:
         # On affiche un message clair plutôt qu'un crash de l'application.
         return dbc.Alert(
