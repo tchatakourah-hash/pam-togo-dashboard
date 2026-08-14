@@ -9,7 +9,7 @@ plotly>=5.24  # px.scatter_map / px.choropleth_map disponibles depuis plotly 5.2
 pandas>=2.2
 openpyxl>=3.1
 numpy>=1.26
-openai>=1.54
+google-genai>=1.0
 
 # --- Optionnel : à installer seulement si vous branchez une vraie base ----
 mysql-connector-python>=9.0
